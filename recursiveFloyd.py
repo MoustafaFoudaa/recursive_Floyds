@@ -18,6 +18,7 @@ def floyd_warshall_recursive(graph):
 
     return result_matrix
 
+
 def measure_performance(graph_function, graph, num_iterations=10):
     total_execution_time = 0
     for _ in range(num_iterations):
@@ -28,7 +29,8 @@ def measure_performance(graph_function, graph, num_iterations=10):
     average_execution_time = total_execution_time / num_iterations
     return result, average_execution_time
 
-# Example usage
+
+# Example usage corrected
 graph_example = [
     [0, 7, float('inf'), 8],
     [float('inf'), 0, 5, float('inf')],
@@ -39,5 +41,25 @@ graph_example = [
 result, execution_time = measure_performance(floyd_warshall_recursive, graph_example)
 print("Result Matrix:")
 print(result)
-print(f"Average Execution Time: {execution_time:.6f} seconds")
+print(f"Execution Time: {execution_time:.6f} seconds")
 
+
+class TestFloydWarshallRecursive(unittest.TestCase):
+    def test_floyd_warshall_recursive_example(self):
+        graph_example = [
+            [0, 7, float('inf'), 8],
+            [float('inf'), 0, 5, float('inf')],
+            [float('inf'), float('inf'), 0, 2],
+            [float('inf'), float('inf'), float('inf'), 0]
+        ]
+        result = floyd_warshall_recursive(graph_example)
+        expected_result = [
+            [0, 7, 12, 8],
+            [float('inf'), 0, 5, 7],
+            [float('inf'), float('inf'), 0, 2],
+            [float('inf'), float('inf'), float('inf'), 0]
+        ]
+        self.assertEqual(result, expected_result)
+
+if __name__ == '__main__':
+    unittest.main()
