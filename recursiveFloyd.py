@@ -18,6 +18,26 @@ def floyd_warshall_recursive(graph):
 
     return result_matrix
 
+def measure_performance(graph_function, graph, num_iterations=10):
+    total_execution_time = 0
+    for _ in range(num_iterations):
+        start_time = time.perf_counter()
+        result = graph_function(graph)
+        end_time = time.perf_counter()
+        total_execution_time += end_time - start_time
+    average_execution_time = total_execution_time / num_iterations
+    return result, average_execution_time
 
+# Example usage
+graph_example = [
+    [0, 7, float('inf'), 8],
+    [float('inf'), 0, 5, float('inf')],
+    [float('inf'), float('inf'), 0, 2],
+    [float('inf'), float('inf'), float('inf'), 0]
+]
 
+result, execution_time = measure_performance(floyd_warshall_recursive, graph_example)
+print("Result Matrix:")
+print(result)
+print(f"Average Execution Time: {execution_time:.6f} seconds")
 
